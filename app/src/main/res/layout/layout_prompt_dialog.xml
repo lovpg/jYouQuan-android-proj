@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/error_dialog_view"
+    android:layout_width="300dp"
+    android:layout_height="120dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_border"
+    android:padding="3dp"
+     >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/error_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:padding="10dp"
+            android:paddingBottom="15dp"
+            android:text="aaaaa"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.45dp"
+            android:background="@color/frends_divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/no"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="No"
+                android:textColor="#6594C7"
+                android:textSize="20dp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0.45dp"
+                android:layout_height="match_parent"
+                android:background="@color/frends_divider" />
+
+            <Button
+                android:id="@+id/ok"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="Ok"
+                android:textColor="#6594C7"
+                android:textSize="20dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

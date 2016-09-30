@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="frends_divider">#dcdcdc</color>
+    <color name="c424344">#99424344</color>
+    <color name="detail_input_view">#d6d6d6</color> 
+    <color name="frends_bg">#f9f9f9</color>
+    <color name="font_black">#666666</color>
+    
+    
+</resources>

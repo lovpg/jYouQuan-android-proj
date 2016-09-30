@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">kDang</string>
+    <string name="app_name">kdang</string>
+    <string name="action_settings">Settings</string>
 </resources>
