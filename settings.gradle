@@ -1,1 +1,1 @@
-include ':app', ':frame_library', ':bither_lib'
+include ':app','libraries:frame_library'
