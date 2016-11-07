@@ -10,7 +10,7 @@ import com.frame.activity.BaseFragmentActivity;
 import com.lbsm.kdang.app.KDangApplication;
 
 /**
- * Created by zrf on 2016/10/11.
+ * date: 2016/10/11.
  */
 
 public class BaseActivity extends BaseFragmentActivity {

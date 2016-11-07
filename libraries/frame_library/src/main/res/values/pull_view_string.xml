@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pull_view_end">It\'s end</string>
+    <string name="pull_view_pull_to_refresh">pull to refresh</string>
+    <string name="pull_view_refresh_time">Update time</string>
+    <string name="pull_view_release_to_refresh">release to refresh</string>
+    <string name="pull_view_refreshing">refreshing</string>
+    <string name="pull_view_pull_to_load">pull to load</string>
+    <string name="pull_view_release_to_load">release to load</string>
+    <string name="pull_view_load_more">load more</string>
+    <string name="pull_view_loading">loading...</string>
+    <string name="pull_view_date_format">yyyy-MM-dd HH:mm:ss</string>
+    <string name="no_more_data">no more data</string>	
+</resources>

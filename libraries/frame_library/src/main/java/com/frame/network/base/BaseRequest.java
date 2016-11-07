@@ -1,8 +1,5 @@
 package com.frame.network.base;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.text.TextUtils;
 
 import com.frame.network.NetEventCode;
@@ -12,6 +9,9 @@ import com.frame.network.exception.FailSessionException;
 import com.frame.network.inter.OnFailSessionObserver;
 import com.frame.network.utils.HttpTool;
 import com.frame.network.utils.LogUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 请求层
@@ -30,9 +30,9 @@ public abstract class BaseRequest<T> extends Request<Response<T>> {
 
     protected abstract T parseResult(String result); //解析数据
 
-    protected abstract void handleResult(T result) throws FailSessionException, FailSessionException; //处理解析出来的数据
+    protected abstract void handleResult(T result) throws FailSessionException; //处理解析出来的数据
 
-    protected abstract String getCooike();
+    protected abstract String getCookie();
     
     private String rawData;
     StringBuilder data;
@@ -40,7 +40,7 @@ public abstract class BaseRequest<T> extends Request<Response<T>> {
     boolean isNetWork = true;
 
     //加载状态反馈
-    public interface LoadObserver {  	
+    public interface LoadObserver {
         void onPreLoadObserver(); //加载前
         void onLoadFinishObserver(); //加载完成 
     }
@@ -60,7 +60,7 @@ public abstract class BaseRequest<T> extends Request<Response<T>> {
             StringBuilder responseInfo = new StringBuilder();
             data = new StringBuilder();
             try {   	
-            	rawData = HttpTool.post(getUrl(), getParams(), getCooike());
+            	rawData = HttpTool.post(getUrl(), getParams(), getCookie());
                 data.append(rawData);
                 isSuccessful = true;
             } catch (RuntimeException e) {

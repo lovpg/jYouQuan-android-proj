@@ -3,11 +3,11 @@ package com.lbsm.kdang.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.lbsm.kdang.R;
+import com.lbsm.kdang.base.BaseActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,10 +16,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Administrator on 2016/10/11.
+ * date: 2016/10/11.
  */
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends BaseActivity {
 
     @Bind(R.id.img_welcome)
     ImageView mWelcomeImg;
@@ -37,7 +37,7 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void initData() {
-
+        mIsLogin = (getApp().getAccount().getUid() != -1) ? true : false;
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {

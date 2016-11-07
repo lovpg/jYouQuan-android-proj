@@ -32,22 +32,20 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-    compile project(":libraries:frame_library")
-
+    compile project(':libraries:frame_library')
+    compile project(':libraries:bither_lib')
     compile rootProject.ext.dependencies["appcompat-v7"]
     compile rootProject.ext.dependencies["butterknife"]
-    compile rootProject.ext.dependencies["rxjava"]
-    compile rootProject.ext.dependencies["okhttp"]
-    compile rootProject.ext.dependencies["gson"]
-    compile rootProject.ext.dependencies["stetho-okhttp"]
-    compile rootProject.ext.dependencies["stetho"]
-    compile rootProject.ext.dependencies["okhttputils"]
-
-
+    compile rootProject.ext.dependencies["statusbarutil"]
     testCompile rootProject.ext.dependencies["junit"]
+    compile rootProject.ext.dependencies["design"]
+    compile rootProject.ext.dependencies["base-rvadapter"]
+    compile rootProject.ext.dependencies["ninegridimageview"]
+    compile rootProject.ext.dependencies["takephoto"]
+
+    compile 'com.android.support:cardview-v7:24.2.1'
 }

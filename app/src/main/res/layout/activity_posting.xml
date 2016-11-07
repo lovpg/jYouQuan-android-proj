@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/gray_main_tab_bg"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/posting_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@string/tv_title_posting"
+            android:textAppearance="@style/TextTitleStyle"/>
+
+        <ImageView
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:src="@drawable/btn_post_send"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/edt_content"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@color/white"/>
+
+    <com.lbsm.kdang.widget.SharePhotoInput
+        android:id="@+id/spi_photo_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/table_border"
+        android:padding="10dp" />
+<!--    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/btn_add_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_add_picture"/>
+    </LinearLayout>-->
+
+
+</LinearLayout>

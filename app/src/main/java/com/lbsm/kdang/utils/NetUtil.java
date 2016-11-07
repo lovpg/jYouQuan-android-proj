@@ -5,7 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
- * Created by zrf on 2016/10/13.
+ * date: on 2016/10/13.
  */
 
 public class NetUtil {

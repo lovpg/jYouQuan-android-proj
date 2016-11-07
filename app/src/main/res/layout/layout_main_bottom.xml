@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="60dp"
+              android:background="@drawable/main_tab_gray_bg"
+              android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/main_tab_home"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/main_tab_home_imgbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:clickable="false"
+            android:src="@drawable/tab_home_selected" />
+
+        <TextView
+            android:id="@+id/main_tab_home_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_tab_tv_home"
+            android:textColor="@color/colorPrimary" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_tab_message"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/main_tab_message_imgbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:clickable="false"
+            android:src="@drawable/tab_message" />
+
+        <TextView
+            android:id="@+id/main_tab_message_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_tab_tv_message"
+            android:textColor="@color/gray_main_tab_text"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_tab_me"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/main_tab_me_imgbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:clickable="false"
+            android:src="@drawable/tab_me" />
+
+        <TextView
+            android:id="@+id/main_tab_me_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_tab_tv_me"
+            android:textColor="@color/gray_main_tab_text"/>
+    </LinearLayout>
+
+
+</LinearLayout>

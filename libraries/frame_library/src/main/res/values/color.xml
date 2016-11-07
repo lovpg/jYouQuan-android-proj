@@ -5,6 +5,10 @@
     <color name="detail_input_view">#d6d6d6</color> 
     <color name="frends_bg">#f9f9f9</color>
     <color name="font_black">#666666</color>
-    
-    
+
+    <color name="black">#000000</color>
+    <color name="bottom_dialog_bule">#037BFF</color>
+    <color name="bottom_dialog_divider">#dcdcdc</color>
+
+
 </resources>

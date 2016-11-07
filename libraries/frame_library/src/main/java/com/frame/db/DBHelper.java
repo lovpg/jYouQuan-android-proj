@@ -17,15 +17,15 @@ public class DBHelper {
         DbUtils.DaoConfig daoConfig = new DbUtils.DaoConfig(context);
         daoConfig.setDbName(name);
         daoConfig.setDbVersion(version);
-        daoConfig.setDbUpgradeListener(new DbUtils.DbUpgradeListener() {
-            @Override
-            public void onUpgrade(DbUtils db, int oldVersion, int newVersion) throws DbException {
-                List<Object> objects = db.findAll(clazz);
-                delteTable(list, db);
-                createTable(list,db);
-                db.saveOrUpdateAll(objects);
-            }
-        });
+//        daoConfig.setDbUpgradeListener(new DbUtils.DbUpgradeListener() {
+//            @Override
+//            public void onUpgrade(DbUtils db, int oldVersion, int newVersion) throws DbException {
+//                List<Object> objects = db.findAll(clazz);
+//                delteTable(list, db);
+//                createTable(list,db);
+//                db.saveOrUpdateAll(objects);
+//            }
+//        });
         db = DbUtils.create(daoConfig);
         createTable(list,db);
         db.configAllowTransaction(true);

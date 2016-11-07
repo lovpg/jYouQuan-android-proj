@@ -1,13 +1,13 @@
 package com.frame.network.bean;
 
 
-import java.io.File;
+import com.frame.network.exception.TypeMisMatchException;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.InputStreamBody;
 
-import com.frame.network.exception.TypeMisMatchException;
+import java.io.File;
 
 /**
  * 请求参数的键值对实现， 每次实例化只有参数类型和键名称和对应参数类型被赋值
@@ -38,7 +38,8 @@ public class NameValueParams implements NameValuePair {
         this(HttpParamType.InputStream_, name, null, null, null, inputStreamBody);
     }
 
-    private NameValueParams(HttpParamType type, String name, String value, File file, ByteArrayBody byteArrayBody, InputStreamBody inputStreamBody) {
+    private NameValueParams(HttpParamType type, String name, String value, File file,
+                            ByteArrayBody byteArrayBody, InputStreamBody inputStreamBody) {
         this.type = type;
         this.name = name;
         this.value = value;

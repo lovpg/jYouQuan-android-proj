@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/view_alumb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|left"
+        android:orientation="horizontal"
+        android:paddingRight="20dp">
+
+        <ImageView
+            android:id="@+id/alumb_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/img_avatar_stub" />
+
+        <TextView
+            android:id="@+id/alumb_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:text="所有图片"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
+
+        <CheckBox
+            android:id="@+id/alumb_check"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|right"
+            android:background="@drawable/check_image"
+            android:button="@null"
+            android:checked="false"
+            android:focusable="false"
+            android:clickable="false"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/detail_input_view" />
+</LinearLayout>

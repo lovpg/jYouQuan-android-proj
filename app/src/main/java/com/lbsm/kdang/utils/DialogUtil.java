@@ -6,7 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.webkit.WebView;
 
 /**
- * Created by zrf on 2016/10/12.
+ * Date on 2016/10/12.
  */
 
 public class DialogUtil {
