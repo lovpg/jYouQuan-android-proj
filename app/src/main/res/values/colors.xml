@@ -13,7 +13,7 @@
     <color name="gray_400">#c1c1c1</color>
     <color name="gray_200">#efefef</color>
     <color name="gray_000">#fcfbfb</color>
-    <color name="gray_main_tab_bg">#f8f8f8</color>
+    <color name="gray_main_tab_bg">#ffffff</color>
     <color name="gray_main_tab_text">#ecf0f1</color>
 
 </resources>
