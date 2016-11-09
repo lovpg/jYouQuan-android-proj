@@ -56,7 +56,7 @@ public class PostingActivity extends BaseActivity  {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 0:
-                    mSendPostReq.setApiParameters("0,0","0,0", mContent,"挖掘机", mUrls);
+                    mSendPostReq.setApiParameters("发送位置","0,0", mContent,"挖掘机", mUrls);
                     break;
             }
         }
@@ -67,7 +67,7 @@ public class PostingActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting);
         ButterKnife.bind(this);
-        StatusBarUtil.setColor(this, getColor(R.color.red_200), 50);
+        StatusBarUtil.setColor(this, this.getResources().getColor(R.color.red_200), 50);
         initView();
     }
 
