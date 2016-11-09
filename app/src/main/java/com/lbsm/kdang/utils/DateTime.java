@@ -23,12 +23,12 @@ public class DateTime
     private static final long ONE_HOUR = 3600000L; 
     private static final long ONE_DAY = 86400000L; 
     private static final long ONE_WEEK = 604800000L; 
-    private static final String ONE_SECOND_AGO = " seconds ago"; 
-    private static final String ONE_MINUTE_AGO = " mins ago"; 
-    private static final String ONE_HOUR_AGO = " hours ago"; 
-    private static final String ONE_DAY_AGO = " days ago"; 
-    private static final String ONE_MONTH_AGO = " months ago"; 
-    private static final String ONE_YEAR_AGO = " years ago"; 
+    private static final String ONE_SECOND_AGO = " 秒前";
+    private static final String ONE_MINUTE_AGO = " 分钟前";
+    private static final String ONE_HOUR_AGO = " 小时前";
+    private static final String ONE_DAY_AGO = " 天前";
+    private static final String ONE_MONTH_AGO = " 月前";
+    private static final String ONE_YEAR_AGO = " 年前";
 
 	/**
 	 * 获取从1970年1月1日经历的天数</br>
