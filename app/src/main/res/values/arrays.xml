@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="home_tab_titles">
+        <item>@string/home_tab_title_post_essence</item>
+        <item>@string/home_tab_title_post_new</item>
+        <item>@string/home_tab_title_post_follow</item>
+    </string-array>
+</resources>

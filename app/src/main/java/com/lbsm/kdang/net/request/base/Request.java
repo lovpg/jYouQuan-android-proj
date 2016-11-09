@@ -7,8 +7,7 @@ import com.frame.network.inter.OnLoadObserver2;
 import com.frame.network.inter.OnParseObserver2;
 import com.google.gson.Gson;
 import com.lbsm.kdang.app.KDangApplication;
-import com.lbsm.kdang.net.HttpUrl;
-import com.lbsm.kdang.preference.LoginAccountPref;
+import com.lbsm.kdang.preference.LoginAuthPref;
 
 import org.json.JSONException;
 
@@ -48,21 +47,23 @@ public abstract class Request<T> extends MultiLoader<T> {
     }
 
     @Override
-    protected String getCooike() {
-        LoginAccountPref loginAccountPref = KDangApplication.getInstance().getAccount();
-        String cooike = null;
+    protected String getCookie() {
+        LoginAuthPref loginAuthPref = KDangApplication.getInstance().getAccount();
+        String cookie = null;
         try {
-            cooike = "uid=" + loginAccountPref.getUid() + ",token=" + loginAccountPref.getToken() + ",SESSIONID=" + loginAccountPref.getSessionid() + ",username=" + URLEncoder.encode(loginAccountPref.getUserName(), "UTF-8");
+            cookie = "uid=" + loginAuthPref.getUid() + ",token="
+                    + loginAuthPref.getToken() + ",SESSIONID=" + loginAuthPref.getSessionId()
+                    + ",username=" + URLEncoder.encode(loginAuthPref.getUsername(), "UTF-8")+",type=android,ver=7";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return null;
         }
-        return cooike;
+        return cookie;
     }
-
-    protected String getDomain() {
-        return HttpUrl.BASE_URL;
-    }
+//
+//    protected String getDomain() {
+//        return HttpUrl.BASE_URL;
+//    }
 
     @Override
     protected T parseGsonBody(String body) throws JSONException {

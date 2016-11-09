@@ -63,7 +63,7 @@ public abstract class BasePreference {
         return mPreferences.getInt(tag, -1);
     }
 
-    public void edtiLong(String tag, long value) {
+    public void editLong(String tag, long value) {
         // TODO Auto-generated method stub
         mPreferences.edit().putLong(tag, value).commit();
     }

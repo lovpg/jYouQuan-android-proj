@@ -1,12 +1,13 @@
 package com.frame.network.base;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.frame.network.inter.OnFailSessionObserver;
 import com.frame.network.inter.OnFailSessionObserver2;
 import com.frame.network.inter.OnLoadObserver2;
 import com.frame.network.inter.OnParseObserver;
 import com.frame.network.inter.OnParseObserver2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -41,15 +42,18 @@ public abstract class MultiLoader<T> extends Loader<T> implements OnFailSessionO
         this(failListener, callBackData, null, null);
     }
 
-    public MultiLoader(OnFailSessionObserver2 failListener, Object callBackData, OnLoadObserver2 loadObserver, OnParseObserver2<? super T> parseObserver) {
+    public MultiLoader(OnFailSessionObserver2 failListener, Object callBackData,
+                       OnLoadObserver2 loadObserver, OnParseObserver2<? super T> parseObserver) {
         this(failListener, callBackData, loadObserver, parseObserver, true, false);
     }
 
-    public MultiLoader(OnFailSessionObserver2 failListener, OnLoadObserver2 loadObserver, OnParseObserver2<? super T> parseObserver) {
+    public MultiLoader(OnFailSessionObserver2 failListener, OnLoadObserver2 loadObserver,
+                       OnParseObserver2<? super T> parseObserver) {
         this(failListener, null, loadObserver, parseObserver, true, false);
     }
 
-    public MultiLoader(OnFailSessionObserver2 failListener, Object callBackData, OnLoadObserver2 loadObserver, OnParseObserver2<? super T> parseObserver, boolean reLogin, boolean cache) {
+    public MultiLoader(OnFailSessionObserver2 failListener, Object callBackData, OnLoadObserver2 loadObserver,
+                       OnParseObserver2<? super T> parseObserver, boolean reLogin, boolean cache) {
         super(reLogin, cache);
         if(failListener != null) this.failListeners.add(failListener);
         this.callBackData = callBackData;

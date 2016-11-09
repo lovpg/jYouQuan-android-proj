@@ -1,7 +1,5 @@
 package com.lbsm.kdang.net.request;
 
-import android.content.Context;
-
 import com.frame.network.base.MultiLoader;
 import com.frame.network.bean.NameValueParams;
 import com.frame.network.inter.OnFailSessionObserver2;
@@ -17,18 +15,16 @@ import java.util.List;
 public class LoginReq extends MultiLoader<LoginAuthVo> {
 
     public static final int HASH_CODE = 2087391381;
-    private String mUserName;
+    private String mPhoneNumber;
     private String mPassword;
-    private Context context;
 
-    public LoginReq(OnParseObserver2<? super LoginAuthVo> parseObserver2, OnFailSessionObserver2 failSessionObserver2, Context context) {
+    public LoginReq(OnParseObserver2<? super LoginAuthVo> parseObserver2, OnFailSessionObserver2 failSessionObserver2) {
         registerParserObserver(parseObserver2);
         registerFailObserver(failSessionObserver2);
-        this.context = context;
     }
 
-    public void setApiParameters(String userName, String password) {
-        this.mUserName = userName;
+    public void setApiParameters(String phoneNumber, String password) {
+        this.mPhoneNumber = phoneNumber;
         this.mPassword = password;
         startRequest();
     }
@@ -40,10 +36,8 @@ public class LoginReq extends MultiLoader<LoginAuthVo> {
 
     @Override
     protected void setParams(List<NameValueParams> params) {
-        params.add(new NameValueParams("username", mUserName));
+        params.add(new NameValueParams("username", mPhoneNumber));
         params.add(new NameValueParams("password", mPassword));
-//        params.add(new NameValueParams("deviceToken", DeviceUtil.getIMEI(context)));
-//        params.add(new NameValueParams("deviceType", DeviceUtil.getDeviceName()));
     }
 
     @Override
@@ -52,7 +46,7 @@ public class LoginReq extends MultiLoader<LoginAuthVo> {
     }
 
     @Override
-    protected String getCooike() {
+    protected String getCookie() {
         return null;
     }
 

@@ -15,6 +15,26 @@
     <string name="tv_register_protocol_pre">使用机手，表示已经同意</string>
     <string name="tv_register_protocol">
         <a href=''>机手用户协议</a></string>
+    <string name="error_phone_number_null">手机号码不能为空</string>
+    <string name="error_phone_number_false">手机号码不正确</string>
+    <string name="error_password_null">密码不能为空</string>
+    <string name="error_verify_code_null">验证码不能为空</string>
 
+    <!-- main tab text -->
+    <string name="main_tab_tv_home">首页</string>
+    <string name="main_tab_tv_message">消息</string>
+    <string name="main_tab_tv_me">我的</string>
+
+    <!-- 主页 tab 标题 -->
+    <string name="home_tab_title_post_essence">精华</string>
+    <string name="home_tab_title_post_new">新贴</string>
+    <string name="home_tab_title_post_follow">关注</string>
+
+    <!--  发帖 -->
+    <string name="tv_title_posting">发帖</string>
+
+
+    <!-- 帖子列表 -->
+    <string name="plv_text_loading">Loading...</string>
 
 </resources>

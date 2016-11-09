@@ -17,37 +17,33 @@ public class RegisterReq extends MultiLoader<LoginAuthVo> {
 
     public static final int HASH_CODE = -1228650458;
 
-    private String mUserName;
+    private String mPhoneNumber;
     private String mPassword;
     private String mCode;
     private String mImagePath;
 
 
-
     public RegisterReq(OnParseObserver2<? super LoginAuthVo> onParseObserver2, OnFailSessionObserver2 failSessionObserver) {
-        // TODO Auto-generated constructor stub
         registerFailObserver(failSessionObserver);
         registerParserObserver(onParseObserver2);
     }
 
-    public void setApiParameters(String userName, String password, String imagePath, String code) {
-        this.mUserName = userName;
+    public void setApiParameters(String phoneNumber, String password, String code, String imagePath) {
+        this.mPhoneNumber = phoneNumber;
         this.mPassword = password;
-        this.mImagePath = imagePath;
         this.mCode = code;
+        this.mImagePath = imagePath;
         startRequest();
     }
 
     @Override
     protected LoginAuthVo parseGsonBody(String body) throws JSONException {
-        // TODO Auto-generated method stub
         return new Gson().fromJson(body, LoginAuthVo.class);
     }
 
     @Override
     protected void setParams(List<NameValueParams> params) {
-        // TODO Auto-generated method stub
-        params.add(new NameValueParams("username", mUserName));
+        params.add(new NameValueParams("username", mPhoneNumber));
         params.add(new NameValueParams("password", mPassword));
         params.add(new NameValueParams("code", mCode));
         params.add(new NameValueParams("file", new File(mImagePath)));
@@ -55,13 +51,11 @@ public class RegisterReq extends MultiLoader<LoginAuthVo> {
 
     @Override
     protected String getApi() {
-        // TODO Auto-generated method stub
         return HttpUrl.REGISTER;
     }
 
     @Override
-    protected String getCooike() {
-        // TODO Auto-generated method stub
+    protected String getCookie() {
         return null;
     }
 

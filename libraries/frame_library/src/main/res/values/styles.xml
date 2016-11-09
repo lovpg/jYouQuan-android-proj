@@ -33,6 +33,10 @@
         <item name="android:layout_width">20dp</item>
         <item name="android:layout_height">20dp</item>
     </style>
-    
+
+    <style name="BottomAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/bottom_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_dialog_out</item>
+    </style>
     
 </resources>

@@ -7,7 +7,6 @@ import com.frame.db.exception.DbException;
 import com.lbsm.kdang.app.KDangApplication;
 
 /**
- * Created by Administrator on 2015/10/9.
  */
 public class PageDb {
 

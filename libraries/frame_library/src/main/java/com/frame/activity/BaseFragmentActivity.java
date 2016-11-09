@@ -43,7 +43,7 @@ import java.util.List;
  * Use:
  * Created by yinglovezhuzhu@gmail.com on 2014-06-06.
  */
-public class BaseFragmentActivity extends AppCompatActivity implements OnFailSessionObserver2,OnParseObserver2<Object> {
+public class BaseFragmentActivity extends AppCompatActivity implements OnFailSessionObserver2, OnParseObserver2<Object> {
 
     protected String TAG = this.getClass().getSimpleName();
     protected LoadingDialog mLoadingDialog;
@@ -52,18 +52,19 @@ public class BaseFragmentActivity extends AppCompatActivity implements OnFailSes
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityContext.put(this);
-        if(mLoadingDialog== null) mLoadingDialog = new LoadingDialog(this);
+        if (mLoadingDialog == null)
+            mLoadingDialog = new LoadingDialog(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       ActivityContext.remove(this);
+        ActivityContext.remove(this);
     }
 
     @Override
     public View onCreateView(String name, Context context, AttributeSet attrs) {
-//    	LogUtil.d(TAG, this.getClass().getSimpleName() + " onCreateView() invoked!!");
+        //    	LogUtil.d(TAG, this.getClass().getSimpleName() + " onCreateView() invoked!!");
         return super.onCreateView(name, context, attrs);
     }
 
@@ -97,28 +98,27 @@ public class BaseFragmentActivity extends AppCompatActivity implements OnFailSes
         }
     }
 
-
-
     /**
      * 隐藏软件盘输入法
+     *
      * @param view
      */
     protected void hideKeyboard(View view) {
-        try{
-            if(view != null){
+        try {
+            if (view != null) {
                 InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-
     /**
      * 带动画的跳转
+     *
      * @param intent
      */
     public void startActivityLeft(Intent intent) {
@@ -174,24 +174,25 @@ public class BaseFragmentActivity extends AppCompatActivity implements OnFailSes
         return getIntent().hasExtra(key);
     }
 
-
     /**
      * 判断list是否为空
+     *
      * @param data
      * @return true为空，false不为空
      */
     protected boolean isListEmpty(List<?> data) {
         return (data == null) || (data.size() == 0);
     }
-    
+
     /**
      * 添加点击事件
-     * @param view 需要添加点击事件的view
+     *
+     * @param view              需要添加点击事件的view
      * @param callbackFunctioin 点击后的回调函数，回调函数有且只有一个参数，参数类型为View
      */
-    protected void addOnClickMethodToView(final View view, final String callbackFunctioin){
+    protected void addOnClickMethodToView(final View view, final String callbackFunctioin) {
         final Class<?> cls = getClass();
-        view.setOnClickListener(new View.OnClickListener(){
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isFinishing()) {
@@ -207,19 +208,19 @@ public class BaseFragmentActivity extends AppCompatActivity implements OnFailSes
             }
         });
     }
-    
-	@Override
-	public void onFailSession(String errorInfo, int failCode, int id,
-			Object callBackData) {
-		// TODO Auto-generated method stub
-		if(mLoadingDialog != null)mLoadingDialog.dismiss();
-        if (StringUtil.isEmpty(errorInfo))showLongToast(errorInfo);
-	}
 
-	@Override
-	public void onParseSuccess(Object t, int id, Object callBackData) {
-		// TODO Auto-generated method stub
+    @Override
+    public void onFailSession(String errorInfo, int failCode, int id,
+                              Object callBackData) {
+        // TODO Auto-generated method stub
+        if (mLoadingDialog != null)
+            mLoadingDialog.dismiss();
+        if (StringUtil.isEmpty(errorInfo))
+            showLongToast(errorInfo);
+    }
 
-	}	  
-	  
+    @Override
+    public void onParseSuccess(Object t, int id, Object callBackData) {
+    }
+
 }

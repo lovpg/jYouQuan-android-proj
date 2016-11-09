@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by zrf on 2016/10/12.
+ * date: 2016/10/12.
  */
 
 public class StringUtil {
@@ -68,9 +68,9 @@ public class StringUtil {
     }
 
     public static boolean checkMobile(String mobile) {
-        if (mobile == null) {
-            return false;
-        }
+//        if (mobile == null) {
+//            return false;
+//        }
         String regex = "(\\+\\d+)?1[34578]\\d{9}$";
         return Pattern.matches(regex, mobile);
     }

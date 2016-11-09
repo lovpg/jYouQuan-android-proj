@@ -4,10 +4,16 @@
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#ff4081</color>
 
+    <color name="transparent">#00000000</color>
+    
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="red_400">#b72e24</color>
+    <color name="red_200">#e71c0e</color>
+    <color name="gray_400">#c1c1c1</color>
     <color name="gray_200">#efefef</color>
     <color name="gray_000">#fcfbfb</color>
+    <color name="gray_main_tab_bg">#f8f8f8</color>
+    <color name="gray_main_tab_text">#ecf0f1</color>
 
 </resources>

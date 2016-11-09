@@ -1,6 +1,7 @@
 package com.lbsm.kdang.ui.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -13,17 +14,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.jaeger.library.StatusBarUtil;
 import com.lbsm.kdang.R;
 import com.lbsm.kdang.base.BaseActivity;
 import com.lbsm.kdang.entity.vo.LoginAuthVo;
-import com.lbsm.kdang.net.HttpUrl;
 import com.lbsm.kdang.net.request.RegisterReq;
+import com.lbsm.kdang.net.request.SendVerifyCodeReq;
+import com.lbsm.kdang.utils.Constants;
 import com.lbsm.kdang.utils.DialogUtil;
+import com.lbsm.kdang.utils.SdcardUtil;
 import com.lbsm.kdang.utils.StringUtil;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
+import com.lbsm.kdang.widget.helper.CountDownButtonHelper;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,17 +35,15 @@ import java.io.InputStream;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
-import okhttp3.Response;
 
 /**
- * Created by zrf on 2016/10/12.
+ * date: 2016/10/12.
  */
 
 public class RegisterActivity extends BaseActivity
         implements View.OnTouchListener {
 
-    private static final String TAG="RegisterActivity";
+    private static final String TAG = "RegisterActivity";
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
@@ -62,14 +62,17 @@ public class RegisterActivity extends BaseActivity
     @Bind(R.id.view_register)
     LinearLayout mRegisterView;
 
-    private final int SEND_VERIFY_CODE_SUCCESS =1;
-    private final int SEND_VERIFY_CODE_FAIL =2;
+    private String mPhoneNumber;
+    private String mPassword;
+    private String mVerifyCode;
+    private CountDownButtonHelper mCountDownButtonHelper;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        StatusBarUtil.setColor(this,getColor(R.color.red_200),50);
         ButterKnife.bind(this);
         initView();
     }
@@ -85,6 +88,7 @@ public class RegisterActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 onBackPressed();
+                finish();
             }
         });
 
@@ -92,105 +96,123 @@ public class RegisterActivity extends BaseActivity
 
     @OnClick({R.id.btn_send_verify_code, R.id.btn_register, R.id.tv_register_protocol})
     public void onClick(View view) {
-        String mobileNumber=mRegisterAccountEdt.getText().toString();
-        String password=mRegisterPasswordEdt.getText().toString();
-        String verifyCode=mRegisterVerifyCodeEdt.getText().toString();
+        hideKeyboard(view);
+        mPhoneNumber = mRegisterAccountEdt.getText().toString();
+        mPassword = mRegisterPasswordEdt.getText().toString();
+        mVerifyCode = mRegisterVerifyCodeEdt.getText().toString();
         switch (view.getId()) {
+
             case R.id.btn_send_verify_code:
-                sendVerifyCodeReq(mobileNumber);
+                sendVerifyCodeReq(mPhoneNumber);
+                break;
 
             case R.id.btn_register:
-
-                try {
-                    InputStream is=getAssets().open("avatar_default.png");
-                    Log.d(TAG,"assets is: "+is.toString());
-                    File file=new File("/sdcard/kdang");
-                    if(!file.exists()){
-                        file.mkdir();
-                    }
-                    FileOutputStream fos=new FileOutputStream(new File("/sdcard/kdang/avatar_default.png"));
-                    byte[] buffer=new byte[1024];
-                    int byteCount=0;
-                    while ((byteCount=is.read(buffer))!=-1){
-                        fos.write(buffer,0,byteCount);
-                    }
-                    fos.flush();
-                    is.close();
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                File file=new File("/sdcard/kdang/avatar_default.png");
-                checkRegisterParamsAndDoRegisterReq(mobileNumber,password,verifyCode,file);
-
-
+                mCountDownButtonHelper.cancle();
+                saveAvatarFileToSdcard();
+                File file = new File(SdcardUtil.getRootPath() + "/kdang/icon_avatar_default.pngt.png");
+                register(mPhoneNumber, mPassword, mVerifyCode, file);
                 break;
+
             case R.id.tv_register_protocol:
                 DialogUtil.showUrlDialog(this, "http://app.lbslm.com/agreement.html");
+                break;
+
+            default:
                 break;
         }
     }
 
-    private void checkRegisterParamsAndDoRegisterReq(String mobileNumber, String password, String verifyCode, File file) {
+    private void sendVerifyCodeReq(String mobileNumber) {
+        if (mobileNumber == null) {
+            showShortToast(getString(R.string.error_phone_number_null));
+            return;
+        }
+        if (!StringUtil.checkMobile(mobileNumber)) {
+            showShortToast(getString(R.string.error_phone_number_false));
+            return;
+        }
+        mLoadingDialog.show();
+        SendVerifyCodeReq sendVerifyCodeReq = new SendVerifyCodeReq(this, this);
+        sendVerifyCodeReq.setApiParameters(mobileNumber);
+    }
 
-        if(!StringUtil.checkMobile(mobileNumber)){
-            Toast.makeText(this,"mobile number can not be null or false",Toast.LENGTH_SHORT).show();
+
+    private void saveAvatarFileToSdcard() {
+        try {
+            InputStream is = getAssets().open("avatar_default.png");
+
+            File file = new File(SdcardUtil.getRootPath() + "/kdang");
+            if (!file.exists()) {
+                file.mkdir();
+            }
+            FileOutputStream fos = new FileOutputStream(new File(file.getPath() + "/avatar_default.png"));
+            byte[] buffer = new byte[1024];
+            int byteCount;
+            while ((byteCount = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, byteCount);
+            }
+            fos.flush();
+            is.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void register(String mobileNumber, String password, String verifyCode, File file) {
+
+        if (mobileNumber == null) {
+            showShortToast(getString(R.string.error_phone_number_null));
             return;
         }
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"password can not be null or false",Toast.LENGTH_SHORT).show();
+        if (!StringUtil.checkMobile(mobileNumber)) {
+            showShortToast(getString(R.string.error_phone_number_false));
             return;
         }
-        if(TextUtils.isEmpty(verifyCode)){
-            Toast.makeText(this,"verify code can not be null or false",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(password)) {
+            showShortToast(getString(R.string.error_password_null));
+            return;
+        }
+        if (TextUtils.isEmpty(verifyCode)) {
+            showShortToast(getString(R.string.error_verify_code_null));
             return;
         }
 
         mLoadingDialog.show();
-        RegisterReq registerReq=new RegisterReq(this,this);
-        registerReq.setApiParameters(mobileNumber,password,file.getPath(),verifyCode);
+        RegisterReq registerReq = new RegisterReq(this, this);
+        registerReq.setApiParameters(mobileNumber, password, verifyCode, file.getPath());
     }
 
-
-    private void sendVerifyCodeReq(String mobileNumber) {
-        if(!StringUtil.checkMobile(mobileNumber)){
-            Toast.makeText(this,"mobile number can not be null or false",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        OkHttpUtils.post().url(HttpUrl.SEND_VERIFY_CODE).addParams("mobile",mobileNumber).build().execute(new Callback() {
-            @Override
-            public Object parseNetworkResponse(Response response, int id) throws Exception {
-                return null;
-            }
-
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                Toast.makeText(RegisterActivity.this,"发送失败，请重新点击发送",Toast.LENGTH_SHORT).show();
-            }
-
-            @SuppressLint("NewApi")
-            @Override
-            public void onResponse(Object response, int id) {
-                mSendVerifyCodeBtn.setText("已发送");
-                mSendVerifyCodeBtn.setTextAppearance(R.style.TextSmallBlackStyle);
-                mSendVerifyCodeBtn.setEnabled(false);
-                mSendVerifyCodeBtn.setBackground(getResources().getDrawable(R.drawable.btn_gray_selector));
-
-            }
-        });
-    }
-
+    @SuppressLint("NewApi")
     @Override
     public void onParseSuccess(Object t, int id, Object callBackData) {
-        switch (id){
+        mLoadingDialog.dismiss();
+        switch (id) {
             case RegisterReq.HASH_CODE:
-                mLoadingDialog.dismiss();
-                LoginAuthVo loginAuth = (LoginAuthVo) t;
-                Log.d(TAG,loginAuth.toString());
-                getApp().getAccount().saveAccount(loginAuth.getData());
+                LoginAuthVo loginAuthVo = (LoginAuthVo) t;
+                Log.d(TAG, loginAuthVo.toString());
+                getApp().getAccount().saveLoginAuth(loginAuthVo.getData());
                 showShortToast("register success");
+                Intent intent = new Intent();
+                intent.putExtra(Constants.PHONE_NUMBER, mPhoneNumber);
+                intent.putExtra(Constants.PASSWORD, mPassword);
+                setResult(Constants.LOGIN_TO_REGISTER_FORRESULT_CODE, intent);
                 finish();
+                break;
+
+            case SendVerifyCodeReq.HASH_CODE:
+                Log.d(TAG, "verify code success");
+                mCountDownButtonHelper = new CountDownButtonHelper(mSendVerifyCodeBtn, this, 60, 1);
+                mCountDownButtonHelper.setOnFinishListener(new CountDownButtonHelper.OnFinishListener() {
+                    @Override
+                    public void finish() {
+                    }
+                });
+                mCountDownButtonHelper.start();
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -202,6 +224,7 @@ public class RegisterActivity extends BaseActivity
 
     @Override
     protected void onDestroy() {
+        ButterKnife.unbind(this);
         super.onDestroy();
     }
 
