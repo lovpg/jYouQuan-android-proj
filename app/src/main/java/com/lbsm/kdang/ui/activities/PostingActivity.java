@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ import static com.darsh.multipleimageselect.helpers.Constants.REQUEST_CODE;
  * date: 2016/10/29.
  */
 
-public class PostingActivity extends BaseActivity  {
+public class PostingActivity extends BaseActivity {
 
     @Bind(R.id.posting_toolbar)
     Toolbar mToolbar;
@@ -51,12 +52,12 @@ public class PostingActivity extends BaseActivity  {
     private SendPostReq mSendPostReq;
 
 
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
-                    mSendPostReq.setApiParameters("0,0","0,0", mContent,"挖掘机", mUrls);
+                    mSendPostReq.setApiParameters("发送位置", "0,0", mContent, "挖掘机", mUrls);
                     break;
             }
         }
@@ -67,13 +68,13 @@ public class PostingActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posting);
         ButterKnife.bind(this);
-        StatusBarUtil.setColor(this, getColor(R.color.red_200), 50);
+        StatusBarUtil.setColor(this, this.getResources().getColor(R.color.red_200), 50);
         initView();
     }
 
     private void initView() {
         mUrls = new ArrayList<>();
-        mSendPostReq=new SendPostReq(this,this);
+        mSendPostReq = new SendPostReq(this, this);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,20 +111,20 @@ public class PostingActivity extends BaseActivity  {
         mLoadingDialog.show();
         mUrls.clear();
 
-        if(mPhotoInput.getLocalFiles() != null && mPhotoInput.getLocalFiles().size() > 0){
-            new Thread(){
+        if (mPhotoInput.getLocalFiles() != null && mPhotoInput.getLocalFiles().size() > 0) {
+            new Thread() {
                 @Override
                 public void run() {
                     boolean isCom = true;
-                    while (isCom){
-                        if(mPhotoInput.isCompress()){
+                    while (isCom) {
+                        if (mPhotoInput.isCompress()) {
                             isCom = false;
                             List<LocalFile> localFiles = mPhotoInput.getLocalFiles();
-                            for (LocalFile localFile : localFiles){
+                            for (LocalFile localFile : localFiles) {
                                 mUrls.add(localFile.getCompressUri());
                             }
                             mHandler.sendEmptyMessage(0);
-                        }else{
+                        } else {
                             try {
                                 Thread.sleep(10000);
                             } catch (InterruptedException e) {
@@ -133,7 +134,7 @@ public class PostingActivity extends BaseActivity  {
                     }
                 }
             }.start();
-        }else{
+        } else {
             mHandler.sendEmptyMessage(0);
         }
     }
@@ -141,30 +142,35 @@ public class PostingActivity extends BaseActivity  {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode != RESULT_OK) return;
+        if (resultCode != RESULT_OK)
+            return;
         switch (requestCode) {
             case Constants.IMAGE_SELECT:
-                if(data != null){
-                    boolean isCamera = data.getBooleanExtra("isCamera",false);
-                    if(isCamera){
+                if (data != null) {
+                    boolean isCamera = data.getBooleanExtra("isCamera", false);
+                    if (isCamera) {
                         LocalFile localFile = (LocalFile) data.getSerializableExtra("localFile");
                         mPhotoInput.addLocalFile(localFile);
-                    }else{
-                        mLocalFiles = (List<LocalFile>) data.getSerializableExtra("mLocalFiles");
-                        if(mLocalFiles != null && mLocalFiles.size() > 0)
+                    } else {
+                        mLocalFiles = (List<LocalFile>) data.getSerializableExtra("localFiles");
+                        Log.d("PostingActivity", "mLocalFiles.size():" + mLocalFiles.size());
+                        if (mLocalFiles != null && mLocalFiles.size() > 0) {
+                            Log.d("PostingActivity", "mLocalFiles:" + mLocalFiles.get(0).getThumbnaiPath());
                             mPhotoInput.addAllLocalFile(mLocalFiles);
+                        }
+
                     }
 
                     mLocalFiles = null;
                 }
                 break;
             case Constants.IMAGE_DELETE:
-                if(data != null){
+                if (data != null) {
                     mLocalFiles = new ArrayList<LocalFile>();
                     List<String> list = data.getStringArrayListExtra("uris");
-                    for (String str : list){
-                        for (LocalFile localFile : mPhotoInput.getLocalFiles()){
-                            if(str.equals(localFile.getThumbnailUri()) || str.equals(localFile.getCompressUri())){
+                    for (String str : list) {
+                        for (LocalFile localFile : mPhotoInput.getLocalFiles()) {
+                            if (str.equals(localFile.getThumbnailUri()) || str.equals(localFile.getCompressUri())) {
                                 mLocalFiles.add(localFile);
                                 break;
                             }
@@ -188,20 +194,20 @@ public class PostingActivity extends BaseActivity  {
             showLongToast("Post share success");
             setResult(REQUEST_CODE);
             finish();
-//            ChosseActivity chosseActivity = ActivityContext.get(ChosseActivity.class);
-//            if(chosseActivity != null) chosseActivity.finish();
-//            finishRight();
-//            //            MeFragment meFragment = ActivityContext.get(MeFragment.class);
-//            //            if(meFragment != null) meFragment.onRefresh();
-//
-//            MakeFriendsFragment makeFriendsFragment = ActivityContext.get(MakeFriendsFragment.class);
-//            if(makeFriendsFragment != null) makeFriendsFragment.onRefresh();
+            //            ChosseActivity chosseActivity = ActivityContext.get(ChosseActivity.class);
+            //            if(chosseActivity != null) chosseActivity.finish();
+            //            finishRight();
+            //            //            MeFragment meFragment = ActivityContext.get(MeFragment.class);
+            //            //            if(meFragment != null) meFragment.onRefresh();
+            //
+            //            MakeFriendsFragment makeFriendsFragment = ActivityContext.get(MakeFriendsFragment.class);
+            //            if(makeFriendsFragment != null) makeFriendsFragment.onRefresh();
         }
 
     }
 
     @Override
-    public void onFailSession(String errorInfo, int failCode, int id,Object callBackData) {
+    public void onFailSession(String errorInfo, int failCode, int id, Object callBackData) {
         mLoadingDialog.dismiss();
         showShortToast(errorInfo);
     }

@@ -37,7 +37,8 @@
         android:id="@+id/edt_content"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:background="@color/white"/>
+        android:background="@color/white"
+        android:textAlignment="viewStart" />
 
     <com.lbsm.kdang.widget.SharePhotoInput
         android:id="@+id/spi_photo_input"

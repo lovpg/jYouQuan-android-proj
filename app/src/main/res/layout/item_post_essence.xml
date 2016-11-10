@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/item_post"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_post"
               xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
@@ -10,7 +11,7 @@
     <com.lbsm.kdang.widget.LabelCardView
         android:id="@+id/lcv_cardview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="4dp"
@@ -27,19 +28,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp">
 
                 <com.lbsm.kdang.widget.CircleImageView
                     android:id="@+id/civ_avatar"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"/>
+                    android:layout_width="48dp"
+                    android:layout_height="48dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.74"
                     android:orientation="vertical">
 
                     <TextView
@@ -82,21 +84,20 @@
                 android:id="@+id/tv_content"
                 android:gravity="center|left"
                 android:lineSpacingExtra="2dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:maxLines="4"
                 android:ellipsize="end"
                 android:autoLink="web"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:layout_weight="1" />
 
             <com.jaeger.ninegridimageview.NineGridImageView
                 android:id="@+id/ngimg_nine_imageview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 app:imgGap="4dp">
@@ -104,16 +105,18 @@
             </com.jaeger.ninegridimageview.NineGridImageView>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_width="545dp"
+                android:layout_height="31dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/gray_200">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_location"/>
+                    android:src="@drawable/icon_location"
+                    android:layout_marginLeft="5dp" />
                 <TextView
                     android:id="@+id/tv_location"
                     android:layout_width="wrap_content"
@@ -130,10 +133,11 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:gravity="left|center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
 
                     <ImageView
                         android:id="@+id/img_praise"
@@ -144,35 +148,38 @@
                         android:id="@+id/tv_praise_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"/>
+                        android:text="0"
+                        android:layout_marginLeft="5dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="left|center_vertical">
 
                     <ImageView
                         android:id="@+id/img_comment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_comment"/>
+                        android:src="@drawable/icon_comment" />
+
                     <TextView
                         android:id="@+id/tv_comment_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"/>
+                        android:text="0"
+                        android:layout_marginLeft="5dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:layout_height="40dp"
+                    android:layout_weight="0.97"
+                    android:gravity="left|center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -184,15 +191,16 @@
                         android:id="@+id/tv_see_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"/>
+                        android:text="0"
+                        android:layout_marginLeft="5dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="left|center_vertical"
                     android:orientation="horizontal">
 
                     <ImageView

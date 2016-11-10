@@ -1,9 +1,5 @@
 package com.lbsm.kdang.picture.view;
 
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.Comparator;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,11 +10,16 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.frame.FrameConstant;
 import com.frame.activity.BaseFragmentActivity;
+import com.lbsm.kdang.base.BaseActivity;
 import com.lbsm.kdang.picture.IntentUtil;
 import com.lbsm.kdang.picture.activity.LargeMultipleActivity;
 import com.lbsm.kdang.picture.activity.base.LargeActivity;
 import com.lbsm.kdang.picture.adapter.MultipleAdapter;
 import com.lbsm.kdang.picture.entity.LocalFile;
+
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by Administrator on 2015/12/1.
@@ -56,7 +57,7 @@ public class MultipleView extends ThumbnailView implements MultipleItem.OnMultip
                 return lhs.getTime() > rhs.getTime() ? 0 : -1;
             }
         });
-        BaseFragmentActivity baseActivity = ((BaseFragmentActivity) getContext());
+        BaseActivity baseActivity = ((BaseActivity) getContext());
         Intent intent = baseActivity.getIntent();
         Bundle bundle = new Bundle();
         if(pictureCamera.getVisibility() == View.GONE){

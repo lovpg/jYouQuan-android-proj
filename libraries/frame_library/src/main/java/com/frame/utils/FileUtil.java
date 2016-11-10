@@ -37,9 +37,27 @@ public class FileUtil {
 			f.createNewFile();
 			System.out.println("文件不存在");
 		}
-       
+
         return s;
     }
+//    /**
+//     * Delete file(include not empty directory)
+//     * @param file
+//     */
+//    public static void deleteFile(File file) {
+//        if(file.exists()) {
+//            if(file.isDirectory()) {
+//                File [] files = file.listFiles();
+//                for (File file2 : files) {
+//                    deleteFile(file2);
+//                }
+//            }
+//            if(!file.delete()) {
+//                LogUtil.e("FileUtil", "Delete file failed, path:" + file.getPath());
+//            }
+//        }
+//    }
+
     public static void saveBitmap(File file,Bitmap bitmap){
 		try{
 			FileOutputStream fos = new FileOutputStream(file);

@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 
 import com.frame.FrameConstant;
-import com.frame.activity.BaseFragmentActivity;
 import com.lbsm.kdang.app.KDangApplication;
+import com.lbsm.kdang.base.BaseActivity;
 import com.lbsm.kdang.picture.IntentUtil;
 import com.lbsm.kdang.picture.activity.base.LargeActivity;
 import com.lbsm.kdang.picture.entity.LocalFile;
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/11/27.
  */
-public class PictureMultipleActivity extends BaseFragmentActivity{
+public class PictureMultipleActivity extends BaseActivity{
 
     private MultipleView multipleView;
     private int number = 9;

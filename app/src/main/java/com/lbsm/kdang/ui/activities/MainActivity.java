@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusBarUtil.setColor(this, getColor(R.color.red_200), 50);
+        StatusBarUtil.setColor(this, this.getResources().getColor(R.color.red_200), 50);
         ButterKnife.bind(this);
 
         initView();
